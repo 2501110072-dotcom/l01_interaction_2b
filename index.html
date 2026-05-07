@@ -3,286 +3,254 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;800&display=swap" rel="stylesheet">
+<title>Interactive Shape Motion</title>
 
 <style>
-* {
+
+*{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Pretendard', sans-serif;
 }
 
-body {
-    background:#000;
-    color:#fff;
-}
-
-/* NAV */
-.nav {
-    position:fixed;
-    width:100%;
-    top:0;
-    z-index:100;
-    background:rgba(0,0,0,0.6);
-    backdrop-filter:blur(10px);
-}
-
-.nav ul {
-    display:flex;
-    justify-content:center;
-    padding:20px;
-}
-
-.nav li {
-    list-style:none;
-    margin:0 20px;
-    cursor:pointer;
-    opacity:0.6;
-    transition:0.3s;
-}
-
-.nav li.active {
-    opacity:1;
-    font-weight:600;
-}
-
-/* SECTION */
-section {
-    height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:100px 20px;
-}
-
-/* HERO */
-#home {
-    font-size:60px;
-    font-weight:800;
-}
-
-/* TEXT */
-h2 {
-    font-size:40px;
-    margin-bottom:20px;
-}
-
-p {
-    max-width:600px;
-    margin:auto;
-    opacity:0.7;
-}
-
-/* WORKS */
-.works {
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
-    max-width:1000px;
-    margin:auto;
-}
-
-.works {
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:20px;
-    max-width:1000px;
-    margin:auto;
-}
-
-.card {
-    position:relative;
+body{
     overflow:hidden;
-    border-radius:20px;
-    cursor:pointer;
+    background:#050505;
+    height:100vh;
+    cursor:none;
+    font-family:sans-serif;
 }
 
-.card img {
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    transition:0.5s;
-}
-
-/* hover 확대 */
-.card:hover img {
-    transform:scale(1.1);
-}
-
-/* overlay */
-.overlay {
-    position:absolute;
-    bottom:0;
-    width:100%;
-    padding:20px;
-    background:linear-gradient(transparent, rgba(0,0,0,0.8));
-    color:#fff;
-    opacity:0;
-    transition:0.4s;
-}
-
-/* hover 시 나타남 */
-.card:hover .overlay {
-    opacity:1;
-}
-/* SCROLL BUTTON */
-.arrow-up {
+/* 정보 패널 */
+.info{
     position:fixed;
-    bottom:40px;
-    right:40px;
-    width:60px;
-    height:60px;
-    border-radius:50%;
-    background:#fff;
-    color:#000;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    cursor:pointer;
-    opacity:0;
-    transition:0.3s;
+    top:20px;
+    left:20px;
+    color:white;
+    z-index:9999;
+    font-size:18px;
+    line-height:1.7;
 }
 
-.arrow-up.show {
-    opacity:1;
+/* 공통 도형 */
+.shape{
+    position:absolute;
+    pointer-events:none;
+
+    animation: float 2s linear forwards;
+
+    mix-blend-mode:screen;
 }
 
-/* ANIMATION */
-.fade {
-    opacity:0;
-    transform:translateY(30px);
-    transition:1s;
+/* 애니메이션 */
+@keyframes float{
+
+    0%{
+        opacity:1;
+        transform:
+        translate(-50%,-50%)
+        scale(0.3)
+        rotate(0deg);
+    }
+
+    100%{
+        opacity:0;
+        transform:
+        translate(-50%,-250%)
+        scale(2)
+        rotate(720deg);
+    }
 }
 
-.fade.show {
-    opacity:1;
-    transform:translateY(0);
+.center{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    font-size:120px;
+    color:#111;
+    font-weight:900;
+    letter-spacing:10px;
 }
 
 </style>
 </head>
-
 <body>
 
-<!-- NAV -->
-<nav class="nav">
-    <ul>
-        <li data-link="#home" class="active">Home</li>
-        <li data-link="#about">About</li>
-        <li data-link="#skills">Skills</li>
-        <li data-link="#works">Works</li>
-        <li data-link="#contact">Contact</li>
-    </ul>
-</nav>
+<div class="info">
+    <div>X : <span id="mx">0</span></div>
+    <div>Y : <span id="my">0</span></div>
+    <div>Shapes : <span id="count">0</span></div>
+    <div>Mode : <span id="mode">Random</span></div>
+</div>
 
-<!-- HOME -->
-<section id="home">
-    <div class="fade">
-        <div>DESIGN PORTFOLIO</div>
-    </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-    <div class="fade">
-        <h2>About Me</h2>
-        <p>사용자 경험을 중심으로 디자인하는 UI/UX 디자이너입니다.</p>
-    </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills">
-    <div class="fade">
-        <h2>Skills</h2>
-        <p>Figma · HTML · CSS · JavaScript · Motion Design</p>
-    </div>
-</section>
-
-<!-- WORKS -->
-<section id="works">
-    <div class="fade">
-        <h2>Works</h2>
-        <div class="works">
-
-            <div class="card">
-                <img src="project1.png" alt="project1">
-                <div class="overlay">
-                    <h3>Project 01</h3>
-                    <p>Detailed page Redesign</p>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="project2.png" alt="project2">
-                <div class="overlay">
-                    <h3>Project 02</h3>
-                    <p>UI&UX Design</p>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="project3.png" alt="project3">
-                <div class="overlay">
-                    <h3>Project 03</h3>
-                    <p>Web Redesign</p>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-    <div class="fade">
-        <h2>Contact</h2>
-        <p>Email: parkjeyen1211@gmail.com</p>
-    </div>
-</section>
-
-<!-- TOP BUTTON -->
-<div class="arrow-up">↑</div>
+<div class="center">SHAPE</div>
 
 <script>
-const nav = document.querySelector('.nav');
-const menu = document.querySelectorAll('.nav li');
-const arrowUp = document.querySelector('.arrow-up');
 
-menu.forEach(item => {
-    item.addEventListener('click', () => {
-        const target = document.querySelector(item.dataset.link);
-        target.scrollIntoView({ behavior: "smooth" });
-    });
-});
+// 총 생성 개수
+let total = 0;
 
-/* SCROLL EFFECT */
-window.addEventListener('scroll', () => {
+// 도형 종류
+const shapes = [
+    "circle",
+    "square",
+    "triangle",
+    "line"
+];
 
-    // arrow button
-    if (window.scrollY > 300) {
-        arrowUp.classList.add('show');
-    } else {
-        arrowUp.classList.remove('show');
+// 랜덤 숫자 함수
+function random(min,max){
+
+    return Math.random() * (max-min) + min;
+
+}
+
+// 랜덤 컬러 함수
+function randomColor(){
+
+    const r = Math.floor(Math.random()*255);
+    const g = Math.floor(Math.random()*255);
+    const b = Math.floor(Math.random()*255);
+
+    return `rgb(${r},${g},${b})`;
+
+}
+
+// 랜덤 도형 함수
+function randomShape(){
+
+    return shapes[
+        Math.floor(Math.random()*shapes.length)
+    ];
+
+}
+
+// 도형 생성 함수
+function createShape(x,y){
+
+    const shape = document.createElement("div");
+
+    shape.classList.add("shape");
+
+    const type = randomShape();
+
+    const size = random(20,150);
+
+    const color = randomColor();
+
+    // 원
+    if(type === "circle"){
+
+        shape.style.width = `${size}px`;
+        shape.style.height = `${size}px`;
+
+        shape.style.borderRadius = "50%";
+
+        shape.style.background = color;
+
     }
 
-    // fade animation
-    document.querySelectorAll('.fade').forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) {
-            el.classList.add('show');
-        }
-    });
+    // 사각형
+    else if(type === "square"){
+
+        shape.style.width = `${size}px`;
+        shape.style.height = `${size}px`;
+
+        shape.style.background = color;
+
+    }
+
+    // 삼각형
+    else if(type === "triangle"){
+
+        shape.style.width = "0";
+        shape.style.height = "0";
+
+        shape.style.borderLeft =
+        `${size/2}px solid transparent`;
+
+        shape.style.borderRight =
+        `${size/2}px solid transparent`;
+
+        shape.style.borderBottom =
+        `${size}px solid ${color}`;
+
+    }
+
+    // 선
+    else if(type === "line"){
+
+        shape.style.width = `${size*2}px`;
+        shape.style.height = `4px`;
+
+        shape.style.background = color;
+
+    }
+
+    // 위치
+    shape.style.left = `${x}px`;
+    shape.style.top = `${y}px`;
+
+    // 블러
+    shape.style.filter =
+    `blur(${random(0,5)}px)`;
+
+    // 회전
+    shape.style.transform =
+    `translate(-50%,-50%)
+    rotate(${random(0,360)}deg)`;
+
+    document.body.appendChild(shape);
+
+    total++;
+
+    document.getElementById("count").innerText = total;
+
+    // 제거
+    setTimeout(()=>{
+        shape.remove();
+    },2000);
+
+}
+
+// 마우스 움직임
+document.addEventListener("mousemove", function(event){
+
+    createShape(
+        event.clientX,
+        event.clientY
+    );
+
+    document.getElementById("mx").innerText =
+    event.clientX;
+
+    document.getElementById("my").innerText =
+    event.clientY;
+
 });
 
-/* TOP BUTTON */
-arrowUp.addEventListener('click', () => {
-    document.querySelector('#home').scrollIntoView({ behavior: "smooth" });
+// 클릭 시 폭발
+document.addEventListener("click", function(event){
+
+    for(let i=0; i<60; i++){
+
+        setTimeout(()=>{
+
+            createShape(
+
+                event.clientX + random(-200,200),
+
+                event.clientY + random(-200,200)
+
+            );
+
+        },i*10);
+
+    }
+
 });
+
 </script>
-
 </body>
 </html>
