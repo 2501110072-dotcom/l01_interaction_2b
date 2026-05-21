@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Interactive Shape Motion</title>
+<title>Creative Sequential Motion</title>
 
 <style>
 
@@ -14,243 +14,265 @@
 }
 
 body{
+    background:#111;
     overflow:hidden;
-    background:#050505;
+    font-family:'Pretendard', sans-serif;
+}
+
+/* VISUAL */
+.visual{
+    width:100%;
     height:100vh;
-    cursor:none;
-    font-family:sans-serif;
+    background:
+    linear-gradient(to bottom, rgba(0,0,0,.2), rgba(0,0,0,.6)),
+    url("imgs/visual_bg.jpg") center/cover no-repeat;
+    position:relative;
 }
 
-/* 정보 패널 */
-.info{
-    position:fixed;
-    top:20px;
-    left:20px;
-    color:white;
-    z-index:9999;
-    font-size:18px;
-    line-height:1.7;
+.visual .inner{
+    width:1200px;
+    height:100%;
+    margin:0 auto;
+    position:relative;
 }
 
-/* 공통 도형 */
-.shape{
+/* 공통 */
+.motion{
+    opacity:0;
+    transform:translateY(100px) scale(.8);
+    transition:
+    opacity 1s ease,
+    transform 1s ease;
+}
+
+.motion.show{
+    opacity:1;
+    transform:translateY(0) scale(1);
+}
+
+/* TITLE */
+.title{
     position:absolute;
-    pointer-events:none;
-
-    animation: float 2s linear forwards;
-
-    mix-blend-mode:screen;
+    top:120px;
+    left:0;
 }
 
-/* 애니메이션 */
-@keyframes float{
+.title img{
+    width:500px;
+}
+
+/* CUP1 */
+.pcup1{
+    position:absolute;
+    bottom:-30px;
+    right:20px;
+}
+
+.cup1.image{
+    width:320px;
+    filter:drop-shadow(0 30px 40px rgba(0,0,0,.35));
+}
+
+.cup1.text{
+    position:absolute;
+    top:-40px;
+    left:-140px;
+    width:180px;
+}
+
+/* CUP2 */
+.pcup2{
+    position:absolute;
+    bottom:-10px;
+    right:320px;
+}
+
+.cup2.image{
+    width:250px;
+    filter:drop-shadow(0 25px 35px rgba(0,0,0,.35));
+}
+
+.cup2.text{
+    position:absolute;
+    top:140px;
+    right:180px;
+    width:160px;
+}
+
+/* SPOON */
+.pspoon{
+    position:absolute;
+    bottom:-20px;
+    left:260px;
+}
+
+.pspoon img{
+    width:250px;
+}
+
+/* 배경 원 */
+.circle{
+    position:absolute;
+    border-radius:50%;
+    background:rgba(255,255,255,.06);
+    backdrop-filter:blur(5px);
+    opacity:0;
+    transform:scale(0);
+    transition:1s ease;
+}
+
+.circle.show{
+    opacity:1;
+    transform:scale(1);
+}
+
+.circle1{
+    width:400px;
+    height:400px;
+    top:80px;
+    right:120px;
+}
+
+.circle2{
+    width:220px;
+    height:220px;
+    bottom:120px;
+    left:150px;
+}
+
+/* FLOAT */
+.float{
+    animation:floating 3s ease-in-out infinite;
+}
+
+@keyframes floating{
 
     0%{
-        opacity:1;
-        transform:
-        translate(-50%,-50%)
-        scale(0.3)
-        rotate(0deg);
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-18px);
     }
 
     100%{
-        opacity:0;
-        transform:
-        translate(-50%,-250%)
-        scale(2)
-        rotate(720deg);
+        transform:translateY(0);
     }
+
 }
 
-.center{
+/* TEXT EFFECT */
+.caption{
     position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    font-size:120px;
-    color:#111;
-    font-weight:900;
-    letter-spacing:10px;
+    left:0;
+    bottom:120px;
+    color:white;
+    opacity:0;
+    transform:translateY(40px);
+    transition:1s ease;
+}
+
+.caption.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.caption h1{
+    font-size:70px;
+    line-height:1.1;
+    margin-bottom:20px;
+}
+
+.caption p{
+    font-size:18px;
+    color:#d8d8d8;
+    line-height:1.8;
 }
 
 </style>
 </head>
+
 <body>
 
-<div class="info">
-    <div>X : <span id="mx">0</span></div>
-    <div>Y : <span id="my">0</span></div>
-    <div>Shapes : <span id="count">0</span></div>
-    <div>Mode : <span id="mode">Random</span></div>
-</div>
+<section class="visual">
 
-<div class="center">SHAPE</div>
+    <div class="inner">
+
+        <!-- 배경 원 -->
+        <div class="circle circle1"></div>
+        <div class="circle circle2"></div>
+
+        <!-- 타이틀 -->
+        <div class="title motion">
+            <img src="imgs/visual_title.png" alt="">
+        </div>
+
+        <!-- 설명 -->
+        <div class="caption">
+            <h1>
+                SWEET<br>
+                CREAM LATTE
+            </h1>
+
+            <p>
+                부드러운 등장 애니메이션과<br>
+                순차적 인터랙션이 결합된<br>
+                비주얼 메인 섹션
+            </p>
+        </div>
+
+        <!-- 컵1 -->
+        <div class="pcup1 motion float">
+            <img src="imgs/visual_cup1.png" alt="" class="cup1 image">
+            <img src="imgs/visual_cup1_text.png" alt="" class="cup1 text">
+        </div>
+
+        <!-- 컵2 -->
+        <div class="pcup2 motion float">
+            <img src="imgs/visual_cup2.png" alt="" class="cup2 image">
+            <img src="imgs/visual_cup2_text.png" alt="" class="cup2 text">
+        </div>
+
+        <!-- 스푼 -->
+        <div class="pspoon motion float">
+            <img src="imgs/visual_spoon.png" alt="">
+        </div>
+
+    </div>
+
+</section>
 
 <script>
 
-// 총 생성 개수
-let total = 0;
+/* 순차 등장 */
 
-// 도형 종류
-const shapes = [
-    "circle",
-    "square",
-    "triangle",
-    "line"
-];
+const motions = document.querySelectorAll('.motion');
 
-// 랜덤 숫자 함수
-function random(min,max){
+motions.forEach((item, index) => {
 
-    return Math.random() * (max-min) + min;
-
-}
-
-// 랜덤 컬러 함수
-function randomColor(){
-
-    const r = Math.floor(Math.random()*255);
-    const g = Math.floor(Math.random()*255);
-    const b = Math.floor(Math.random()*255);
-
-    return `rgb(${r},${g},${b})`;
-
-}
-
-// 랜덤 도형 함수
-function randomShape(){
-
-    return shapes[
-        Math.floor(Math.random()*shapes.length)
-    ];
-
-}
-
-// 도형 생성 함수
-function createShape(x,y){
-
-    const shape = document.createElement("div");
-
-    shape.classList.add("shape");
-
-    const type = randomShape();
-
-    const size = random(20,150);
-
-    const color = randomColor();
-
-    // 원
-    if(type === "circle"){
-
-        shape.style.width = `${size}px`;
-        shape.style.height = `${size}px`;
-
-        shape.style.borderRadius = "50%";
-
-        shape.style.background = color;
-
-    }
-
-    // 사각형
-    else if(type === "square"){
-
-        shape.style.width = `${size}px`;
-        shape.style.height = `${size}px`;
-
-        shape.style.background = color;
-
-    }
-
-    // 삼각형
-    else if(type === "triangle"){
-
-        shape.style.width = "0";
-        shape.style.height = "0";
-
-        shape.style.borderLeft =
-        `${size/2}px solid transparent`;
-
-        shape.style.borderRight =
-        `${size/2}px solid transparent`;
-
-        shape.style.borderBottom =
-        `${size}px solid ${color}`;
-
-    }
-
-    // 선
-    else if(type === "line"){
-
-        shape.style.width = `${size*2}px`;
-        shape.style.height = `4px`;
-
-        shape.style.background = color;
-
-    }
-
-    // 위치
-    shape.style.left = `${x}px`;
-    shape.style.top = `${y}px`;
-
-    // 블러
-    shape.style.filter =
-    `blur(${random(0,5)}px)`;
-
-    // 회전
-    shape.style.transform =
-    `translate(-50%,-50%)
-    rotate(${random(0,360)}deg)`;
-
-    document.body.appendChild(shape);
-
-    total++;
-
-    document.getElementById("count").innerText = total;
-
-    // 제거
-    setTimeout(()=>{
-        shape.remove();
-    },2000);
-
-}
-
-// 마우스 움직임
-document.addEventListener("mousemove", function(event){
-
-    createShape(
-        event.clientX,
-        event.clientY
-    );
-
-    document.getElementById("mx").innerText =
-    event.clientX;
-
-    document.getElementById("my").innerText =
-    event.clientY;
+    setTimeout(() => {
+        item.classList.add('show');
+    }, index * 700);
 
 });
 
-// 클릭 시 폭발
-document.addEventListener("click", function(event){
+/* 원 등장 */
 
-    for(let i=0; i<60; i++){
+setTimeout(() => {
+    document.querySelector('.circle1').classList.add('show');
+}, 300);
 
-        setTimeout(()=>{
+setTimeout(() => {
+    document.querySelector('.circle2').classList.add('show');
+}, 900);
 
-            createShape(
+/* 텍스트 등장 */
 
-                event.clientX + random(-200,200),
-
-                event.clientY + random(-200,200)
-
-            );
-
-        },i*10);
-
-    }
-
-});
+setTimeout(() => {
+    document.querySelector('.caption').classList.add('show');
+}, 1500);
 
 </script>
+
 </body>
 </html>
