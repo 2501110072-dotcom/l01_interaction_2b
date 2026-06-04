@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Pretendard', sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#000;
+    color:#fff;
+    overflow-x:hidden;
+}
+
+/* NAVIGATION */
+.nav{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
+    background:rgba(0,0,0,0.5);
+    backdrop-filter:blur(10px);
+}
+
+.nav ul{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.nav li{
+    list-style:none;
+    margin:0 20px;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:500;
+    opacity:0.5;
+    transition:0.3s;
+    letter-spacing:1px;
+}
+
+.nav li:hover,
+.nav li.active{
+    opacity:1;
+}
+
+/* SECTION */
+section{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:120px 20px;
+}
+
+/* HOME */
+#home{
+    position:relative;
+    overflow:hidden;
+}
+
+.hero-text h1{
+    font-size:90px;
+    font-weight:800;
+    letter-spacing:5px;
+}
+
+.hero-text p{
+    margin-top:20px;
+    font-size:20px;
+    opacity:0.7;
+}
+
+/* COMMON */
+.container{
+    width:100%;
+    max-width:1200px;
+}
+
+h2{
+    font-size:56px;
+    margin-bottom:20px;
+}
+
+.description{
+    max-width:700px;
+    margin:auto;
+    line-height:1.8;
+    opacity:0.7;
+}
+
+/* SKILLS */
+.skills-list{
+    margin-top:40px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+.skill{
+    border:1px solid rgba(255,255,255,0.2);
+    padding:16px 30px;
+    border-radius:50px;
+    transition:0.3s;
+}
+
+.skill:hover{
+    background:#fff;
+    color:#000;
+}
+
+/* WORKS */
+.works-grid{
+    margin-top:60px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:25px;
+}
+
+.card{
+    position:relative;
+    overflow:hidden;
+    border-radius:24px;
+    cursor:pointer;
+    background:#111;
+}
+
+.card img{
+    width:100%;
+    height:420px;
+    object-fit:cover;
+    transition:0.6s;
+}
+
+/* HOVER EFFECT */
+.card:hover img{
+    transform:scale(1.08);
+}
+
+/* OVERLAY */
+.overlay{
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:100%;
+    padding:30px;
+    background:linear-gradient(transparent, rgba(0,0,0,0.9));
+    opacity:0;
+    transition:0.4s;
+    text-align:left;
+}
+
+.card:hover .overlay{
+    opacity:1;
+}
+
+.overlay h3{
+    font-size:28px;
+    margin-bottom:10px;
+}
+
+.overlay p{
+    opacity:0.7;
+    line-height:1.6;
+}
+
+/* CONTACT */
+.contact-box{
+    margin-top:40px;
+}
+
+.contact-box p{
+    margin:10px 0;
+    font-size:18px;
+    opacity:0.7;
+}
+
+/* TOP BUTTON */
+.arrow-up{
+    position:fixed;
+    right:40px;
+    bottom:40px;
+    width:65px;
+    height:65px;
+    border:none;
+    border-radius:50%;
+    background:#fff;
+    color:#000;
+    font-size:28px;
+    cursor:pointer;
+    opacity:0;
+    transform:translateY(20px);
+    transition:0.4s;
+    z-index:999;
+}
+
+.arrow-up.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* SCROLL ANIMATION */
+.fade{
+    opacity:0;
+    transform:translateY(60px);
+    transition:1s;
+}
+
+.fade.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+
+    .hero-text h1{
+        font-size:52px;
+    }
+
+    h2{
+        font-size:40px;
+    }
+
+    .nav ul{
+        gap:10px;
+        flex-wrap:wrap;
+    }
+
+    .nav li{
+        margin:0 10px;
+        font-size:14px;
+    }
+
+    .card img{
+        height:300px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+    <ul>
+        <li class="active" data-link="#home">HOME</li>
+        <li data-link="#about">ABOUT</li>
+        <li data-link="#skills">SKILLS</li>
+        <li data-link="#works">WORKS</li>
+        <li data-link="#contact">CONTACT</li>
+    </ul>
+</nav>
+
+<!-- HOME -->
+<section id="home">
+    <div class="hero-text fade">
+        <h1>DESIGN<br>PORTFOLIO</h1>
+        <p>UI/UX Designer & Creative Developer</p>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+    <div class="container fade">
+        <h2>About Me</h2>
+        <p class="description">
+            사용자 경험과 감성을 연결하는 디자인을 만듭니다.
+            인터랙션과 비주얼 중심의 UI/UX 디자인을 연구하며,
+            브랜드의 분위기를 웹으로 표현하는 작업을 좋아합니다.
+        </p>
+    </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+    <div class="container fade">
+        <h2>Skills</h2>
+
+        <div class="skills-list">
+            <div class="skill">Figma</div>
+            <div class="skill">Photoshop</div>
+            <div class="skill">Illustrator</div>
+            <div class="skill">HTML</div>
+            <div class="skill">CSS</div>
+            <div class="skill">JavaScript</div>
+            <div class="skill">Motion Design</div>
+        </div>
+    </div>
+</section>
+
+<!-- WORKS -->
+<section id="works">
+    <div class="container fade">
+
+        <h2>Works</h2>
+
+        <div class="works-grid">
+
+            <!-- PROJECT 1 -->
+            <div class="card">
+                <img src="img/project1.jpg" alt="project1">
+
+                <div class="overlay">
+                    <h3>Project 01</h3>
+                    <p>
+                        패션 브랜드 웹사이트 리디자인<br>
+                        UI/UX & Interaction Design
+                    </p>
+                </div>
+            </div>
+
+            <!-- PROJECT 2 -->
+            <div class="card">
+                <img src="img/project2.jpg" alt="project2">
+
+                <div class="overlay">
+                    <h3>Project 02</h3>
+                    <p>
+                        Banking App Renewal<br>
+                        Mobile UX Design
+                    </p>
+                </div>
+            </div>
+
+            <!-- PROJECT 3 -->
+            <div class="card">
+                <img src="img/project3.jpg" alt="project3">
+
+                <div class="overlay">
+                    <h3>Project 03</h3>
+                    <p>
+                        Branding & Visual Design<br>
+                        Creative Direction
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+    <div class="container fade">
+
+        <h2>Contact</h2>
+
+        <div class="contact-box">
+            <p>Email : your@email.com</p>
+            <p>Instagram : @portfolio</p>
+            <p>Behance : behance.net/portfolio</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- TOP BUTTON -->
+<button class="arrow-up">↑</button>
+
+<script>
+
+/* MENU SCROLL */
+const menuItems = document.querySelectorAll('.nav li');
+
+menuItems.forEach(item => {
+
+    item.addEventListener('click', () => {
+
+        const target = document.querySelector(item.dataset.link);
+
+        target.scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+        });
+
+    });
+
+});
+
+/* TOP BUTTON */
+const arrowUp = document.querySelector('.arrow-up');
+
+arrowUp.addEventListener('click', () => {
+
+    document.querySelector('#home').scrollIntoView({
+        behavior:"smooth"
+    });
+
+});
+
+/* SCROLL EVENTS */
+window.addEventListener('scroll', () => {
+
+    /* TOP BUTTON */
+    if(window.scrollY > 300){
+        arrowUp.classList.add('show');
+    }else{
+        arrowUp.classList.remove('show');
+    }
+
+    /* FADE ANIMATION */
+    const fades = document.querySelectorAll('.fade');
+
+    fades.forEach(fade => {
+
+        const rect = fade.getBoundingClientRect();
+
+        if(rect.top < window.innerHeight - 100){
+            fade.classList.add('show');
+        }
+
+    });
+
+});
+
+/* ACTIVE MENU */
+const sections = document.querySelectorAll('section');
+
+window.addEventListener('scroll', () => {
+
+    let current = "";
+
+    sections.forEach(section => {
+
+        const sectionTop = section.offsetTop;
+
+        if(scrollY >= sectionTop - 200){
+            current = section.getAttribute('id');
+        }
+
+    });
+
+    menuItems.forEach(li => {
+
+        li.classList.remove('active');
+
+        if(li.dataset.link === `#${current}`){
+            li.classList.add('active');
+        }
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
