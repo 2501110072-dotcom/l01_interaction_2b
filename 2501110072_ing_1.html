@@ -1,0 +1,1718 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PARK JAEYEON | Portfolio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+<style>
+
+/* ==================================================
+   RESET
+================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #0b0b0b;
+    color: #fff;
+    font-family: "Inter", "Noto Sans KR", sans-serif;
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font-family: inherit;
+}
+
+
+/* ==================================================
+   CUSTOM CURSOR
+================================================== */
+
+.cursor {
+    position: fixed;
+
+    width: 18px;
+    height: 18px;
+
+    border: 1px solid #fff;
+    border-radius: 50%;
+
+    pointer-events: none;
+    z-index: 9999;
+
+    transform: translate(-50%, -50%);
+
+    transition:
+        width .25s ease,
+        height .25s ease,
+        background .25s ease;
+}
+
+.cursor.active {
+    width: 70px;
+    height: 70px;
+
+    background: #fff;
+
+    mix-blend-mode: difference;
+}
+
+
+/* ==================================================
+   HEADER
+================================================== */
+
+header {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    padding: 28px 50px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    z-index: 1000;
+
+    background: rgba(11, 11, 11, .35);
+
+    backdrop-filter: blur(15px);
+}
+
+.logo {
+    font-size: 20px;
+
+    font-weight: 800;
+
+    letter-spacing: -1px;
+}
+
+nav {
+    display: flex;
+
+    gap: 35px;
+}
+
+nav a {
+    position: relative;
+
+    font-size: 14px;
+}
+
+nav a::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -6px;
+
+    width: 0;
+    height: 1px;
+
+    background: #fff;
+
+    transition: .3s;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+
+/* ==================================================
+   HERO
+================================================== */
+
+.hero {
+    height: 100vh;
+
+    min-height: 700px;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 8vw;
+
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+
+    width: 600px;
+    height: 600px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.18),
+            transparent 65%
+        );
+
+    filter: blur(10px);
+
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+
+    z-index: 2;
+}
+
+.hero-small {
+    font-size: 14px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 25px;
+
+    opacity: .6;
+}
+
+.hero h1 {
+    font-size: clamp(70px, 12vw, 180px);
+
+    line-height: .82;
+
+    letter-spacing: -9px;
+
+    font-weight: 800;
+}
+
+.hero h1 span {
+    display: block;
+}
+
+.hero-description {
+    margin-top: 50px;
+
+    max-width: 450px;
+
+    line-height: 1.8;
+
+    color: #aaa;
+}
+
+
+/* ==================================================
+   SECTION
+================================================== */
+
+section {
+    padding: 150px 8vw;
+}
+
+.section-title {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: end;
+
+    margin-bottom: 70px;
+}
+
+.section-title h2 {
+    font-size: clamp(45px, 7vw, 100px);
+
+    letter-spacing: -5px;
+}
+
+.section-number {
+    color: #666;
+}
+
+
+/* ==================================================
+   ABOUT
+================================================== */
+
+.about {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 100px;
+}
+
+.about-text {
+    font-size: clamp(25px, 3vw, 45px);
+
+    line-height: 1.35;
+
+    letter-spacing: -2px;
+}
+
+.about-info {
+    border-top: 1px solid #333;
+}
+
+.info-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 20px 0;
+
+    border-bottom: 1px solid #333;
+
+    color: #aaa;
+}
+
+.info-row strong {
+    color: #fff;
+}
+
+
+/* ==================================================
+   WORK CONTROLS
+================================================== */
+
+.work-controls {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 12px;
+}
+
+.work-controls button {
+    background: none;
+
+    color: #fff;
+
+    border: 1px solid #333;
+
+    padding: 10px 18px;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.work-controls button:hover,
+.work-controls button.active {
+    background: #fff;
+
+    color: #000;
+}
+
+
+/* ==================================================
+   WORKS - GRID
+================================================== */
+
+.works {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 25px;
+}
+
+.work-card {
+    position: relative;
+
+    min-height: 500px;
+
+    overflow: hidden;
+
+    background: #161616;
+
+    cursor: pointer;
+
+    transform-style: preserve-3d;
+
+    transition:
+        transform .15s ease,
+        grid-column .4s ease;
+}
+
+.work-image {
+    position: absolute;
+
+    inset: 0;
+
+    background-size: cover;
+
+    background-position: center;
+
+    transition:
+        transform .7s cubic-bezier(.2,.8,.2,1),
+        filter .5s;
+}
+
+
+/* 임시 프로젝트 이미지 */
+
+.work-card:nth-child(1) .work-image {
+    background:
+        linear-gradient(
+            135deg,
+            #111,
+            #555
+        );
+}
+
+.work-card:nth-child(2) .work-image {
+    background:
+        linear-gradient(
+            135deg,
+            #222,
+            #777
+        );
+}
+
+.work-card:nth-child(3) .work-image {
+    background:
+        linear-gradient(
+            135deg,
+            #333,
+            #111
+        );
+}
+
+.work-card:nth-child(4) .work-image {
+    background:
+        linear-gradient(
+            135deg,
+            #555,
+            #222
+        );
+}
+
+
+.work-card:hover .work-image {
+    transform: scale(1.08);
+
+    filter: brightness(.55);
+}
+
+
+/* ==================================================
+   WORK CONTENT - GRID
+================================================== */
+
+.work-content {
+    position: absolute;
+
+    inset: 0;
+
+    padding: 30px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    opacity: 0;
+
+    transition: .4s;
+}
+
+.work-card:hover .work-content {
+    opacity: 1;
+}
+
+.work-category {
+    font-size: 12px;
+
+    letter-spacing: 2px;
+
+    color: #bbb;
+}
+
+.work-title {
+    font-size: clamp(35px, 5vw, 70px);
+
+    font-weight: 700;
+
+    letter-spacing: -3px;
+}
+
+.work-view {
+    display: inline-block;
+
+    border: 1px solid #fff;
+
+    padding: 10px 18px;
+
+    margin-top: 15px;
+}
+
+
+/* ==================================================
+   WORKS - LIST
+================================================== */
+
+.works.list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0;
+
+    width: 100%;
+}
+
+
+/* 각각의 LIST 행 */
+
+.works.list .work-card {
+    position: relative;
+
+    width: 100%;
+
+    min-height: 145px;
+
+    border-bottom: 1px solid #333;
+
+    background: transparent;
+
+    display: grid;
+
+    /*
+        CATEGORY 30%
+        TITLE    50%
+        BUTTON   20%
+    */
+
+    grid-template-columns: 30% 50% 20%;
+
+    transform: none !important;
+}
+
+
+/* 이미지 제거 */
+
+.works.list .work-image {
+    display: none;
+}
+
+
+/* 콘텐츠 초기화 */
+
+.works.list .work-content {
+    position: relative;
+
+    inset: auto;
+
+    width: 100%;
+
+    height: 100%;
+
+    min-height: 145px;
+
+    padding: 25px 0;
+
+    display: contents;
+
+    opacity: 1;
+}
+
+
+/* CATEGORY */
+
+.works.list .work-category {
+    grid-column: 1;
+
+    align-self: center;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    color: #999;
+}
+
+
+/* 내부 div 제거 */
+
+.works.list .work-content > div:last-child {
+    display: contents;
+}
+
+
+/* PROJECT TITLE */
+
+.works.list .work-title {
+    grid-column: 2;
+
+    align-self: center;
+
+    font-size: clamp(32px, 3vw, 52px);
+
+    line-height: 1;
+
+    font-weight: 700;
+
+    letter-spacing: -2px;
+}
+
+
+/* VIEW PROJECT */
+
+.works.list .work-view {
+    grid-column: 3;
+
+    justify-self: start;
+
+    align-self: center;
+
+    margin-left: 0;
+
+    padding: 10px 14px;
+
+    border: 1px solid #555;
+
+    font-size: 12px;
+
+    white-space: nowrap;
+
+    transition:
+        background .3s ease,
+        color .3s ease;
+}
+
+.works.list .work-view:hover {
+    background: #fff;
+
+    color: #000;
+}
+
+
+/* ==================================================
+   SKILLS
+================================================== */
+
+.skills {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.skill {
+    border: 1px solid #333;
+
+    padding: 35px;
+
+    min-height: 220px;
+
+    transition: .4s;
+}
+
+.skill:hover {
+    background: #fff;
+
+    color: #000;
+
+    transform:
+        translateY(-10px);
+}
+
+.skill-number {
+    color: #666;
+
+    margin-bottom: 60px;
+}
+
+.skill h3 {
+    font-size: 28px;
+
+    margin-bottom: 15px;
+}
+
+.skill p {
+    color: #888;
+
+    line-height: 1.6;
+}
+
+.skill:hover p {
+    color: #333;
+}
+
+
+/* ==================================================
+   CONTACT
+================================================== */
+
+.contact {
+    min-height: 80vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+.contact h2 {
+    font-size: clamp(
+        60px,
+        12vw,
+        180px
+    );
+
+    line-height: .9;
+
+    letter-spacing: -8px;
+}
+
+.contact-mail {
+    margin-top: 50px;
+
+    font-size: 20px;
+
+    color: #aaa;
+}
+
+.contact-mail:hover {
+    color: #fff;
+}
+
+
+/* ==================================================
+   SCROLL REVEAL
+================================================== */
+
+.reveal {
+    opacity: 0;
+
+    transform:
+        translateY(80px);
+
+    transition:
+        opacity .8s ease,
+        transform .8s
+        cubic-bezier(.2,.8,.2,1);
+}
+
+.reveal.show {
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+
+/* ==================================================
+   MOBILE
+================================================== */
+
+@media(max-width: 700px) {
+
+    header {
+        padding: 22px;
+    }
+
+    nav {
+        gap: 15px;
+    }
+
+    nav a {
+        font-size: 11px;
+    }
+
+
+    .hero {
+        padding: 0 22px;
+    }
+
+    .hero h1 {
+        letter-spacing: -5px;
+    }
+
+
+    section {
+        padding: 100px 22px;
+    }
+
+
+    .about {
+        grid-template-columns: 1fr;
+
+        gap: 60px;
+    }
+
+
+    .works {
+        grid-template-columns: 1fr;
+    }
+
+
+    .work-card {
+        min-height: 400px;
+    }
+
+
+    .skills {
+        grid-template-columns: 1fr;
+    }
+
+
+    .section-title {
+        align-items: start;
+
+        flex-direction: column;
+
+        gap: 25px;
+    }
+
+
+    .contact h2 {
+        letter-spacing: -5px;
+    }
+
+
+    .cursor {
+        display: none;
+    }
+
+
+    /* MOBILE LIST */
+
+    .works.list .work-card {
+
+        min-height: 120px;
+
+        grid-template-columns:
+            1fr auto;
+
+        gap: 20px;
+    }
+
+
+    .works.list .work-category {
+
+        grid-column: 1 / -1;
+
+        align-self: end;
+
+        margin-bottom: -20px;
+
+        font-size: 9px;
+    }
+
+
+    .works.list .work-title {
+
+        grid-column: 1;
+
+        align-self: center;
+
+        font-size: 28px;
+    }
+
+
+    .works.list .work-view {
+
+        grid-column: 2;
+
+        align-self: center;
+
+        font-size: 10px;
+
+        padding: 8px 10px;
+    }
+
+}
+
+
+/* ==================================================
+   SMALL MOBILE
+================================================== */
+
+@media(max-width: 430px) {
+
+    nav {
+        gap: 9px;
+    }
+
+    nav a {
+        font-size: 9px;
+    }
+
+    .hero h1 {
+        font-size: 58px;
+
+        letter-spacing: -4px;
+    }
+
+    .works.list .work-title {
+        font-size: 23px;
+    }
+
+    .works.list .work-view {
+        font-size: 9px;
+
+        padding: 7px 8px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     CUSTOM CURSOR
+================================================== -->
+
+<div class="cursor"></div>
+
+
+<!-- ==================================================
+     HEADER
+================================================== -->
+
+<header>
+
+    <a href="#" class="logo">
+        JY.
+    </a>
+
+    <nav>
+
+        <a href="#about">
+            ABOUT
+        </a>
+
+        <a href="#works">
+            WORKS
+        </a>
+
+        <a href="#skills">
+            SKILLS
+        </a>
+
+        <a href="#contact">
+            CONTACT
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- ==================================================
+     HERO
+================================================== -->
+
+<section class="hero">
+
+    <div class="hero-bg"></div>
+
+    <div class="hero-content">
+
+        <div class="hero-small">
+            UI / UX DESIGNER · FRONT-END
+        </div>
+
+        <h1>
+            <span>PARK</span>
+            <span>JAEYEON</span>
+        </h1>
+
+        <p class="hero-description">
+            사용자 경험을 중심으로 생각하고,
+            디자인과 인터랙션을 통해
+            새로운 경험을 만드는 디자이너입니다.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     ABOUT
+================================================== -->
+
+<section id="about">
+
+    <div class="section-title reveal">
+
+        <h2>
+            ABOUT
+        </h2>
+
+        <span class="section-number">
+            01
+        </span>
+
+    </div>
+
+
+    <div class="about">
+
+
+        <div class="about-text reveal">
+
+            좋은 디자인은
+            보기 좋은 것을 넘어
+            사용자의 행동과 경험을
+            변화시킨다고 생각합니다.
+
+        </div>
+
+
+        <div class="about-info reveal">
+
+            <div class="info-row">
+
+                <span>
+                    NAME
+                </span>
+
+                <strong>
+                    박재연
+                </strong>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span>
+                    ROLE
+                </span>
+
+                <strong>
+                    UI / UX Designer
+                </strong>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span>
+                    FIELD
+                </span>
+
+                <strong>
+                    Web / App / Interaction
+                </strong>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span>
+                    TOOLS
+                </span>
+
+                <strong>
+                    Figma / Photoshop / HTML / CSS
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     WORKS
+================================================== -->
+
+<section id="works">
+
+
+    <div class="section-title reveal">
+
+        <div>
+
+            <h2>
+                WORKS
+            </h2>
+
+        </div>
+
+
+        <div>
+
+            <span class="section-number">
+                02
+            </span>
+
+
+            <div class="work-controls">
+
+                <button
+                    class="active"
+                    id="gridBtn">
+
+                    GRID
+
+                </button>
+
+
+                <button
+                    id="listBtn">
+
+                    LIST
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="works"
+        id="worksContainer">
+
+
+        <!-- PROJECT 01 -->
+
+        <article
+            class="work-card reveal">
+
+            <div class="work-image"></div>
+
+
+            <div class="work-content">
+
+                <div class="work-category">
+                    UI / UX REDESIGN
+                </div>
+
+
+                <div>
+
+                    <div class="work-title">
+
+                        WON<br>
+                        BANKING
+
+                    </div>
+
+
+                    <span class="work-view">
+                        VIEW PROJECT →
+                    </span>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- PROJECT 02 -->
+
+        <article
+            class="work-card reveal">
+
+            <div class="work-image"></div>
+
+
+            <div class="work-content">
+
+                <div class="work-category">
+                    WEB REDESIGN
+                </div>
+
+
+                <div>
+
+                    <div class="work-title">
+
+                        JEJU<br>
+                        TRAVEL
+
+                    </div>
+
+
+                    <span class="work-view">
+                        VIEW PROJECT →
+                    </span>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- PROJECT 03 -->
+
+        <article
+            class="work-card reveal">
+
+            <div class="work-image"></div>
+
+
+            <div class="work-content">
+
+                <div class="work-category">
+                    BRAND / WEB
+                </div>
+
+
+                <div>
+
+                    <div class="work-title">
+
+                        KIYOUNG<br>
+                        CHICKEN
+
+                    </div>
+
+
+                    <span class="work-view">
+                        VIEW PROJECT →
+                    </span>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- PROJECT 04 -->
+
+        <article
+            class="work-card reveal">
+
+            <div class="work-image"></div>
+
+
+            <div class="work-content">
+
+                <div class="work-category">
+                    INTERACTION DESIGN
+                </div>
+
+
+                <div>
+
+                    <div class="work-title">
+
+                        TRANSPORT<br>
+                        KIOSK
+
+                    </div>
+
+
+                    <span class="work-view">
+                        VIEW PROJECT →
+                    </span>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     SKILLS
+================================================== -->
+
+<section id="skills">
+
+
+    <div class="section-title reveal">
+
+        <h2>
+            SKILLS
+        </h2>
+
+        <span class="section-number">
+            03
+        </span>
+
+    </div>
+
+
+    <div class="skills">
+
+
+        <div class="skill reveal">
+
+            <div class="skill-number">
+                01
+            </div>
+
+            <h3>
+                UI / UX
+            </h3>
+
+            <p>
+                사용자 분석부터 정보구조,
+                와이어프레임과 UI 디자인까지
+                사용자 경험을 설계합니다.
+            </p>
+
+        </div>
+
+
+        <div class="skill reveal">
+
+            <div class="skill-number">
+                02
+            </div>
+
+            <h3>
+                WEB DESIGN
+            </h3>
+
+            <p>
+                브랜드와 목적에 맞는
+                웹사이트의 구조와
+                비주얼 디자인을 설계합니다.
+            </p>
+
+        </div>
+
+
+        <div class="skill reveal">
+
+            <div class="skill-number">
+                03
+            </div>
+
+            <h3>
+                FRONT-END
+            </h3>
+
+            <p>
+                HTML, CSS, JavaScript를 활용해
+                디자인을 실제 웹 화면으로
+                구현합니다.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     CONTACT
+================================================== -->
+
+<section
+    id="contact"
+    class="contact">
+
+
+    <div class="section-number">
+        04 / CONTACT
+    </div>
+
+
+    <h2 class="reveal">
+
+        LET'S<br>
+        CREATE.
+
+    </h2>
+
+
+    <a
+        href="mailto:your@email.com"
+        class="contact-mail reveal">
+
+        your@email.com →
+
+    </a>
+
+
+</section>
+
+
+
+<script>
+
+/* ==================================================
+   CUSTOM CURSOR
+================================================== */
+
+const cursor =
+    document.querySelector(".cursor");
+
+
+document.addEventListener(
+    "mousemove",
+    (e) => {
+
+        cursor.style.left =
+            e.clientX + "px";
+
+        cursor.style.top =
+            e.clientY + "px";
+
+    }
+);
+
+
+const interactiveElements =
+    document.querySelectorAll(
+        "a, button, .work-card, .skill"
+    );
+
+
+interactiveElements.forEach(
+    element => {
+
+        element.addEventListener(
+            "mouseenter",
+            () => {
+
+                cursor.classList.add(
+                    "active"
+                );
+
+            }
+        );
+
+
+        element.addEventListener(
+            "mouseleave",
+            () => {
+
+                cursor.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+    }
+);
+
+
+/* ==================================================
+   HERO MOUSE PARALLAX
+================================================== */
+
+const heroBg =
+    document.querySelector(
+        ".hero-bg"
+    );
+
+
+document.addEventListener(
+    "mousemove",
+    (e) => {
+
+        const x =
+            (
+                e.clientX /
+                window.innerWidth
+                - .5
+            ) * 80;
+
+
+        const y =
+            (
+                e.clientY /
+                window.innerHeight
+                - .5
+            ) * 80;
+
+
+        heroBg.style.transform =
+            `translate(${x}px, ${y}px)`;
+
+    }
+);
+
+
+/* ==================================================
+   GRID / LIST
+================================================== */
+
+const works =
+    document.querySelector(
+        "#worksContainer"
+    );
+
+
+const gridBtn =
+    document.querySelector(
+        "#gridBtn"
+    );
+
+
+const listBtn =
+    document.querySelector(
+        "#listBtn"
+    );
+
+
+gridBtn.addEventListener(
+    "click",
+    () => {
+
+        works.classList.remove(
+            "list"
+        );
+
+        gridBtn.classList.add(
+            "active"
+        );
+
+        listBtn.classList.remove(
+            "active"
+        );
+
+    }
+);
+
+
+listBtn.addEventListener(
+    "click",
+    () => {
+
+        works.classList.add(
+            "list"
+        );
+
+        listBtn.classList.add(
+            "active"
+        );
+
+        gridBtn.classList.remove(
+            "active"
+        );
+
+    }
+);
+
+
+/* ==================================================
+   3D PROJECT CARD
+================================================== */
+
+const cards =
+    document.querySelectorAll(
+        ".work-card"
+    );
+
+
+cards.forEach(
+    card => {
+
+
+        card.addEventListener(
+            "mousemove",
+            (e) => {
+
+
+                /*
+                    LIST에서는
+                    3D 효과 제거
+                */
+
+                if (
+                    works.classList.contains(
+                        "list"
+                    )
+                ) {
+
+                    card.style.transform =
+                        "none";
+
+                    return;
+
+                }
+
+
+                const rect =
+                    card.getBoundingClientRect();
+
+
+                const x =
+                    e.clientX -
+                    rect.left;
+
+
+                const y =
+                    e.clientY -
+                    rect.top;
+
+
+                const rotateY =
+                    (
+                        x /
+                        rect.width
+                        - .5
+                    ) * 10;
+
+
+                const rotateX =
+                    (
+                        y /
+                        rect.height
+                        - .5
+                    ) * -10;
+
+
+                card.style.transform =
+                    `perspective(1000px)
+                     rotateX(${rotateX}deg)
+                     rotateY(${rotateY}deg)
+                     scale(1.01)`;
+
+            }
+        );
+
+
+        card.addEventListener(
+            "mouseleave",
+            () => {
+
+                card.style.transform =
+                    "none";
+
+            }
+        );
+
+    }
+);
+
+
+/* ==================================================
+   SCROLL REVEAL
+================================================== */
+
+const revealElements =
+    document.querySelectorAll(
+        ".reveal"
+    );
+
+
+const observer =
+    new IntersectionObserver(
+
+        entries => {
+
+            entries.forEach(
+                entry => {
+
+                    if (
+                        entry.isIntersecting
+                    ) {
+
+                        entry.target.classList.add(
+                            "show"
+                        );
+
+                    }
+
+                }
+            );
+
+        },
+
+        {
+            threshold: .15
+        }
+
+    );
+
+
+revealElements.forEach(
+    element => {
+
+        observer.observe(
+            element
+        );
+
+    }
+);
+
+
+/* ==================================================
+   SKILL HOVER
+================================================== */
+
+document
+    .querySelectorAll(".skill")
+    .forEach(
+        skill => {
+
+
+            skill.addEventListener(
+                "mouseenter",
+                () => {
+
+                    skill.style.transform =
+                        "translateY(-10px) rotate(-1deg)";
+
+                }
+            );
+
+
+            skill.addEventListener(
+                "mouseleave",
+                () => {
+
+                    skill.style.transform =
+                        "translateY(0) rotate(0)";
+
+                }
+            );
+
+        }
+    );
+
+</script>
+
+</body>
+</html>
